@@ -9,6 +9,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { LogIn, LogOut, User } from 'lucide-react'
+import { FcGoogle } from "react-icons/fc"
 
 export default function AuthButton() {
   const { data: session, status } = useSession()
@@ -26,16 +27,20 @@ export default function AuthButton() {
         </div>
         <Button variant="outline" onClick={() => signOut()}>
           <LogOut className="h-4 w-4 mr-2" />
-          Logout
+          <span className='hidden sm:inline'>
+            Logout
+          </span>
         </Button>
       </div>
     )
   }
 
   return (
-    <Button onClick={() => signIn('google')}>
+    <Button className='bg-gradient-to-r from-indigo-500 via-indigo-500 to-indigo-500 flex items-center' onClick={() => signIn('google')}>
       <LogIn className="h-4 w-4 mr-2" />
-      Login with Google
+      <span className='hidden sm:inline'>
+        Login with Google
+      </span>
     </Button>
   )
 }

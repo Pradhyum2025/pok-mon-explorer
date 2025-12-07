@@ -16,6 +16,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { toggleFavorite } from '@/redux/slices/favoritesSlice'
+import { motion } from 'framer-motion'
 
 export default function PokemonDetail({ pokemon, open, onOpenChange }) {
   const dispatch = useAppDispatch()
@@ -28,9 +29,9 @@ export default function PokemonDetail({ pokemon, open, onOpenChange }) {
     dispatch(toggleFavorite(pokemon.id))
   }
 
-  const imageUrl = pokemon.sprites?.other?.['official-artwork']?.front_default || 
-                   pokemon.sprites?.front_default || 
-                   ''
+  const imageUrl = pokemon.sprites?.other?.['official-artwork']?.front_default ||
+    pokemon.sprites?.front_default ||
+    ''
 
   const getStatName = (statName) => {
     const names = {
@@ -61,69 +62,79 @@ export default function PokemonDetail({ pokemon, open, onOpenChange }) {
           </div>
         </DialogHeader>
 
-        <div className="space-y-4 md:space-y-5 overflow-y-auto max-h-[calc(90vh-120px)] md:max-h-none md:overflow-y-visible">
-          <div className="flex justify-center">
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt={pokemon.name}
-                className="h-40 w-40 md:h-48 md:w-48 object-contain"
-              />
-            ) : (
-              <div className="h-40 w-40 md:h-48 md:w-48 bg-muted rounded flex items-center justify-center">
-                <span className="text-muted-foreground">No image</span>
-              </div>
-            )}
-          </div>
-
-          <div>
-            <h3 className="text-base font-semibold mb-1.5">Types</h3>
-            <div className="flex gap-2 flex-wrap">
-              {pokemon.types?.map((type, idx) => (
-                <span
-                  key={idx}
-                  className="px-2.5 py-1 rounded-full text-xs bg-secondary text-secondary-foreground capitalize"
-                >
-                  {type.type.name}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-base font-semibold mb-1.5">Abilities</h3>
-            <div className="flex gap-2 flex-wrap">
-              {pokemon.abilities?.map((ability, idx) => (
-                <span
-                  key={idx}
-                  className="px-2.5 py-1 rounded-md text-xs bg-muted capitalize"
-                >
-                  {ability.ability.name}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-base font-semibold mb-2">Base Stats</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
-              {pokemon.stats?.map((stat, idx) => (
-                <div key={idx} className="space-y-1">
-                  <div className="flex justify-between items-center text-xs">
-                    <span className="font-medium capitalize text-foreground">{getStatName(stat.stat.name)}</span>
-                    <span className="font-semibold text-sm">{stat.base_stat}</span>
-                  </div>
-                  <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
-                    <div
-                      className="bg-primary h-full rounded-full transition-all duration-300"
-                      style={{ width: `${Math.min((stat.base_stat / 255) * 100, 100)}%` }}
-                    />
-                  </div>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        // whileHover={{ scale: 1.02 }}
+        >
+          <div className="space-y-4 md:space-y-5 overflow-y-auto max-h-[calc(90vh-120px)] md:max-h-none md:overflow-y-visible">
+            <div className="flex justify-center">
+              {imageUrl ? (
+                <img
+                  src={imageUrl}
+                  alt={pokemon.name}
+                  className="h-40 w-40 md:h-48 md:w-48 object-contain"
+                />
+              ) : (
+                <div className="h-40 w-40 md:h-48 md:w-48 bg-muted rounded flex items-center justify-center">
+                  <span className="text-muted-foreground">No image</span>
                 </div>
-              ))}
+              )}
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold mb-2 text-foreground">Types</h3>
+              <div className="flex gap-2 flex-wrap">
+                {pokemon.types?.map((type, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1.5 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-indigo-100 text-indigo-700 border border-indigo-200/50 capitalize shadow-sm"
+                  >
+                    {type.type.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold mb-2 text-foreground">Abilities</h3>
+              <div className="flex gap-2 flex-wrap">
+                {pokemon.abilities?.map((ability, idx) => (
+                  <span
+                    key={idx}
+                    className="px-3 py-1.5 rounded-lg text-xs font-medium bg-gradient-to-r from-slate-100 to-gray-100 text-slate-700 border border-slate-200/50 capitalize shadow-sm"
+                  >
+                    {ability.ability.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-base font-semibold mb-2">Base Stats</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+                {pokemon.stats?.map((stat, idx) => (
+                  <div key={idx} className="space-y-1">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="font-medium capitalize text-foreground">{getStatName(stat.stat.name)}</span>
+                      <span className="font-semibold text-sm">{stat.base_stat}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="bg-indigo-500 h-full rounded-full transition-all duration-300"
+                        style={{ width: `${Math.min((stat.base_stat / 255) * 100, 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+
+        </motion.div>
+
+
       </DialogContent>
     </Dialog>
   )

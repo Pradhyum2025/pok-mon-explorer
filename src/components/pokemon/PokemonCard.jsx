@@ -37,7 +37,7 @@ export default function PokemonCard({ pokemon, onCardClick }) {
       whileHover={{ scale: 1.02 }}
     >
       <Card 
-        className="cursor-pointer hover:shadow-lg transition-shadow"
+        className="cursor-pointer hover:shadow-xl transition-all duration-300 border-border/60 bg-gradient-to-br from-white to-slate-50/50 hover:border-primary/30"
         onClick={() => onCardClick(pokemon)}
       >
         <CardContent className="p-4">
@@ -75,7 +75,7 @@ export default function PokemonCard({ pokemon, onCardClick }) {
             {pokemon.types?.map((type, idx) => (
               <span
                 key={idx}
-                className="px-2 py-1 rounded-full text-xs bg-secondary text-secondary-foreground capitalize"
+                className="px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-indigo-100 text-indigo-700 border border-indigo-200/50 capitalize shadow-sm"
               >
                 {type.type.name}
               </span>

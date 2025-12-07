@@ -145,10 +145,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b sticky top-0 bg-background/95 backdrop-blur z-10">
+      <header className="border-b border-border/40 sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center mb-4">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">Pokémon Explorer</h1>
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-indigo-500 via-indigo-600 to-indigo-500 bg-clip-text text-transparent">Pokémon Explorer</h1>
             <AuthButton />
           </div>
           
@@ -189,7 +189,7 @@ export default function Home() {
       </main>
 
       {!loading && selectedType === 'all' && !searchQuery && (
-        <div className="fixed bottom-0 left-0 right-0 bg-background border-t shadow-lg z-20">
+        <div className="fixed bottom-0 left-0 right-0 bg-white/90 backdrop-blur-md border-t border-border/40 shadow-lg z-20">
           <div className="container mx-auto px-4 py-4">
             <div className="flex flex-row items-center justify-between gap-4">
               <div className="text-xs sm:text-sm text-muted-foreground">
