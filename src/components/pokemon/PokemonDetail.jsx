@@ -47,7 +47,7 @@ export default function PokemonDetail({ pokemon, open, onOpenChange }) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto md:max-h-[85vh] md:overflow-y-visible md:overflow-hidden">
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto md:max-h-[87vh] md:overflow-y-visible md:overflow-hidden ">
         <DialogHeader className="pr-10 md:pr-12">
           <div className="flex items-center justify-between gap-4">
             <DialogTitle className="text-2xl md:text-3xl text-left capitalize flex-1">{pokemon.name}</DialogTitle>
@@ -68,7 +68,7 @@ export default function PokemonDetail({ pokemon, open, onOpenChange }) {
           transition={{ duration: 0.6 }}
         // whileHover={{ scale: 1.02 }}
         >
-          <div className="space-y-4 md:space-y-5 overflow-y-auto max-h-[calc(90vh-120px)] md:max-h-none md:overflow-y-visible">
+          <div className="space-y-4 md:space-y-5 overflow-y-auto max-h-[calc(90vh-120px)] md:max-h-none md:overflow-y-visible mb-5">
             <div className="flex justify-center">
               {imageUrl ? (
                 <img
@@ -111,7 +111,7 @@ export default function PokemonDetail({ pokemon, open, onOpenChange }) {
               </div>
             </div>
 
-            <div>
+            <div className=''>
               <h3 className="text-base font-semibold mb-2">Base Stats</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
                 {pokemon.stats?.map((stat, idx) => (
@@ -130,6 +130,7 @@ export default function PokemonDetail({ pokemon, open, onOpenChange }) {
                 ))}
               </div>
             </div>
+
           </div>
 
         </motion.div>
